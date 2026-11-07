@@ -588,7 +588,6 @@ input:checked ~ .txt .n{color:var(--gold)}
 <section class="panel" aria-label="Задания">
   <div class="panel-head">
     <div class="ph-left"><h2>7 заданий</h2><span class="sync" id="sync"><i></i><span id="syncTxt">Подключаюсь…</span></span></div>
-    <button class="reset" id="reset" type="button">Начать заново</button>
   </div>
   <ol id="list"></ol>
 </section>
@@ -783,21 +782,6 @@ input:checked ~ .txt .n{color:var(--gold)}
     wasAll = all;
   }
 
-  const resetBtn = document.getElementById("reset");
-  let armed = null;
-  resetBtn.addEventListener("click",()=>{
-    if(!armed){
-      resetBtn.textContent="Точно? Нажми ещё раз"; resetBtn.classList.add("confirm");
-      armed = setTimeout(()=>{ armed=null; resetBtn.textContent="Начать заново"; resetBtn.classList.remove("confirm"); },3000);
-      return;
-    }
-    clearTimeout(armed); armed=null;
-    resetBtn.textContent="Начать заново"; resetBtn.classList.remove("confirm");
-    state = Array(7).fill(false); inputs.forEach(x=>x.checked=false);
-    try{ localStorage.removeItem("seven-stars-scale-v1"); }catch(e){}
-    scales = {};
-    render(); persist();
-  });
 
   /* ---------- reflection questions (index = star number - 1) ---------- */
   const SCALE_Q = "Если ноль — это жизнь, где всё держится только на тебе, а десять — жизнь, где ты доверяешь себе и другим, где ты сейчас?";
